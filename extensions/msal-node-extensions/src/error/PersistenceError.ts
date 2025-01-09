@@ -43,6 +43,15 @@ export class PersistenceError extends Error {
     }
 
     /**
+     * Error thrown when trying to write, load, or delete data from KeyRingPersistence.
+     */
+    static createKeyRingPersistenceError(
+        errorMessage: string
+    ): PersistenceError {
+        return new PersistenceError("KeyRingError", errorMessage);
+    }
+
+    /**
      * Error thrown when trying to write, load, or delete data from keychain on macOs.
      */
     static createKeychainPersistenceError(

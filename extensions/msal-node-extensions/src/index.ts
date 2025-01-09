@@ -9,6 +9,7 @@ export { FilePersistenceWithDataProtection } from "./persistence/FilePersistence
 export { DataProtectionScope } from "./persistence/DataProtectionScope";
 export { KeychainPersistence } from "./persistence/KeychainPersistence";
 export { LibSecretPersistence } from "./persistence/LibSecretPersistence";
+export { KeyRingPersistence } from "./persistence/KeyRingPersistence";
 export { IPersistence } from "./persistence/IPersistence";
 export { CrossPlatformLockOptions } from "./lock/CrossPlatformLockOptions";
 export { PersistenceCreator } from "./persistence/PersistenceCreator";

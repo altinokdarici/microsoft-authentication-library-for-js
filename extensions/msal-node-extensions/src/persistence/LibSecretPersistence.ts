@@ -3,7 +3,7 @@
  * Licensed under the MIT License.
  */
 
-import keytar from "keytar";
+import keytar from "@napi-rs/keyring/keytar";
 import { FilePersistence } from "./FilePersistence";
 import { IPersistence } from "./IPersistence";
 import { PersistenceError } from "../error/PersistenceError";
@@ -13,6 +13,8 @@ import { BasePersistence } from "./BasePersistence";
 import { isNodeError } from "../utils/TypeGuards";
 
 /**
+ * @deprecated This class is deprecated in favor of the KeyRingPersistence class.
+ *
  * Uses reads and writes passwords to Secret Service API/libsecret. Requires libsecret
  * to be installed.
  *

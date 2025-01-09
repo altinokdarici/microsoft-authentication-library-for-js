@@ -73,14 +73,14 @@ const pca = new PublicClientApplication({
 
 The FilePersistenceWithDataProtection uses the Win32 CryptProtectData and CryptUnprotectData APIs. For more information on dataProtectionScope, or optionalEntropy, reference the documentation for those APIs.
 
-#### Mac:
+#### Linux / Mac:
 ```js
-const { KeychainPersistence } = require("@azure/msal-node-extensions");
+const { KeyRingPersistence } = require("@azure/msal-node-extensions");
 
 const cachePath = "path/to/cache/file.json";
 const serviceName = "test-msal-electron-service";
 const accountName = "test-msal-electron-account";
-const macPersistence = await KeychainPersistence.create(cachePath, serviceName, accountName);
+const macPersistence = await KeyRingPersistence.create(cachePath, serviceName, accountName);
 // Use the persistence object to initialize an MSAL PublicClientApplication with cachePlugin
 const pca = new PublicClientApplication({
                 auth: {
@@ -93,33 +93,9 @@ const pca = new PublicClientApplication({
 
 ```
 
-- cachePath is **not** where the cache will be stored. Instead, the extensions update this file with dummy data to update the file's update time, to check if the contents on the keychain should be loaded or not. It is also used as the location for the lock file.
+- cachePath is **not** where the cache will be stored. Instead, the extensions update this file with dummy data to update the file's update time, to check if the contents on the secret store should be loaded or not. It is also used as the location for the lock file.
 - service name under which the cache is stored the keychain.
 - account name under which the cache is stored in the keychain.
-
-#### Linux:
-```js
-const { LibSecretPersistence } = require("@azure/msal-node-extensions");
-
-const cachePath = "path/to/cache/file.json";
-const serviceName = "test-msal-electron-service";
-const accountName = "test-msal-electron-account";
-const linuxPersistence = await LibSecretPersistence.create(cachePath, serviceName, accountName);
-// Use the persistence object to initialize an MSAL PublicClientApplication with cachePlugin
-const pca = new PublicClientApplication({
-                auth: {
-                        clientId: "CLIENT_ID_HERE",
-                    },
-                cache: {
-                        cachePlugin: new PersistenceCachePlugin(linuxPersistence);
-                    },
-                });
-
-```
-
-- cachePath is **not** where the cache will be stored. Instead, the extensions update this file with dummy data to update the file's update time, to check if the contents on the secret service (Gnome Keyring for example) should be loaded or not. It is also used as the location for the lock file.
-- service name under which the cache is stored the secret service.
-- account name under which the cache is stored in the secret service.
 
 #### All platforms
 An unencrypted file persistence, which works across all platforms, is provided for convenience, although not recommended.
